@@ -66,4 +66,26 @@ router.put("/:houseId/:bedroomId", async (req, res, next) => {
   }
 });
 
+router.delete("/:bedroomId", async (req, res, next) => {
+  try {
+    const { bedroomId } = req.params;
+    if (!bedroomId) res.status(400).json("Necessary Parameter missing");
+    else {
+      const house = await Bedroom.find({ _id: bedroomId });
+      const { houseId } = house[0];
+      await Bedroom.findOneAndDelete({ _id: bedroomId });
+      await House.findByIdAndUpdate(
+        { _id: houseId },
+        { $pull: { rooms: { _id: bedroomId } } }
+      );
+      res.status(200).json({
+        status: "success",
+        message: "deleted room successfully!",
+      });
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;
