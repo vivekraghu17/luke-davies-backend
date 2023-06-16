@@ -13,8 +13,9 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const { houseName,userName, size, rooms } = req.body;
-    if (!userName || !houseName) res.status(400).json("Necessary parameter missing");
+    const { houseName, userName, size, rooms } = req.body;
+    if (!userName || !houseName)
+      res.status(400).json("Necessary parameter missing");
     else {
       var houseCreation = await House.create({
         houseName,
@@ -22,8 +23,10 @@ router.post("/", async (req, res, next) => {
         size,
         rooms,
       });
-  
-      res.status(200).json(houseCreation);
+
+      res
+        .status(200)
+        .json({ status: "success", message: "Created house successfully" });
     }
   } catch (err) {
     next(err);

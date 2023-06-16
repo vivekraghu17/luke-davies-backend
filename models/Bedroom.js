@@ -13,5 +13,9 @@ const Bedroom = new Schema({
     type: String,
     required: true,
   },
+  houseId: {
+    type: String,
+    required: true,
+  },
 });
 module.exports = mongoose.model("Bedroom", Bedroom);
