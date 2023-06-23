@@ -13,9 +13,9 @@ const Bedroom = new Schema({
     type: String,
     required: true,
   },
-  houseId: {
+  houseAddress: {
     type: String,
     required: true,
-  },
+  }, // associate username or house address as primary key
 });
 module.exports = mongoose.model("Bedroom", Bedroom);

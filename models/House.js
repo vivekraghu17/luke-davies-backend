@@ -1,14 +1,11 @@
 const mongoose = require("mongoose");
 const Bedroom = require("./Bedroom");
+const User = require("./User");
 const Schema = mongoose.Schema;
 const House = new Schema({
   houseName: {
     type: String,
     required: true,
-  },
-  userName:{
-    type:String,
-    required:true,
   },
   size: {
     type: String,
@@ -16,7 +13,11 @@ const House = new Schema({
   },
   rooms: {
     type: [Bedroom.schema],
-    required:true
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
   },
 });
 module.exports = mongoose.model("House", House);
